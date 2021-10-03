@@ -5,4 +5,4 @@
 
 [3-Third Homework-Machine Learning for Classification](https://github.com/AbdelrahmanAbdelmougeth/ML-Zoomcamp-Homeworks/blob/3-Third-Homework-Machine-Learning-for-Classification/3-Third%20Homework-Machine%20Learning%20for%20Classification.ipynb)
 
-[4-Fourth Homework-Evaluation Metrics for Classification](https://github.com/AbdelrahmanAbdelmougeth/ML-Zoomcamp-Homeworks/compare/main...4-Fourth-Homework-Evaluation-Metrics-for-Classification?expand=1)
+[4-Fourth Homework-Evaluation Metrics for Classification](https://github.com/AbdelrahmanAbdelmougeth/ML-Zoomcamp-Homeworks/blob/4-Fourth-Homework-Evaluation-Metrics-for-Classification/4-Fourth%20Homework-Evaluation%20Metrics%20for%20Classification.ipynb)
