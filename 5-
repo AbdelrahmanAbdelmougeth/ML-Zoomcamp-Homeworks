@@ -1,0 +1,7 @@
+# Question 1: Version of Pipenv 
+
+Answer:
+C:\Python\zoomcamp> pipenv --version
+pipenv, version 2021.5.29
+
+
