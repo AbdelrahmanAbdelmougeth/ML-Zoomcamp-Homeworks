@@ -62,22 +62,17 @@ The answer is 0.11549580587832914
 
 ============================================================================================================
 ---> Question 4
+Now let's serve this model as a web service
 
+Install Flask and Gunicorn (or waitress, if you're on Windows)
+Write Flask code for serving the model
+Now score this customer using requests:
+url = "YOUR_URL"
+customer = {"contract": "two_year", "tenure": 1, "monthlycharges": 10}
+requests.post(url, json=customer).json()
+What's the probability that this customer is churning?
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-============================
+====================
 Answer:
 
 /*predict.py file*/
@@ -145,6 +140,7 @@ Commands:
  
  C:\Python\Homework> python predict-test.py
  
+ =================
  Answer:
 {'churn': True, 'churn_probability': 0.9988892771007961}
 sending promo email to xyz-123
@@ -196,7 +192,7 @@ customer = {"contract": "two_year", "tenure": 12, "monthlycharges": 10}
 requests.post(url, json=customer).json()
 What's the probability that this customer is churning?
 
-===========
+===============
 Answer:
 1-build then run the docker image
 2-open a new terminal and run python predict-test.py
@@ -205,6 +201,8 @@ the result is:
 PS C:\Python\Homework> python predict-test.py
 {'churn': False, 'churn_probability': 0.32940789808151005}
 not sending promo email to xyz-123
+
+----> 0.329
 
 
         
