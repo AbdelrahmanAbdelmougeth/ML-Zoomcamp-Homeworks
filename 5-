@@ -1,7 +1,160 @@
-# Question 1: Version of Pipenv 
+--> Question 1: Version of Pipenv 
 
 Answer:
 C:\Python\zoomcamp> pipenv --version
 pipenv, version 2021.5.29
+
+=========================================================================================================
+-->Question 2
+Use Pipenv to install Scikit-Learn version 1.0
+What's the first hash for scikit-learn you get in Pipfile.lock?
+
+Answer:
+"_meta": {
+        "hash": {
+            "sha256": "34547a3dcc21f0399f427311321b7de24a677e97565494d97f5a825b5a6c8284"
+        },
+=========================================================================================================
+---> Question 3:
+Let's use these models!
+
+Write a script for loading these models with pickle
+Score this customer:
+{"contract": "two_year", "tenure": 12, "monthlycharges": 19.7}
+What's the probability that this customer is churning?
+
+If you're getting errors when unpickling the files, check their checksum:
+
+$ md5sum model1.bin dv.bin
+5868e129bfbb309ba60bf750263afab1  model1.bin
+c49b69f8a5a3c560882ff5daa3c0ff4d  dv.bin
+
+============================
+Answer:
+import pickle
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+
+model = pickle.load(open('model1.bin', 'rb'))
+model
+
+LogisticRegression()
+
+model_file = 'dv.bin'
+with open(model_file , 'rb') as f_in:
+    dv = pickle.load(f_in)   
+dv
+
+DictVectorizer(sparse=False)
+
+
+customer = {"contract": "two_year", "tenure": 12, "monthlycharges": 19.7}
+X_small = dv.transform([customer])
+
+model.predict_proba(X_small)[0,1]
+
+The answer is 0.11549580587832914
+0.115
+
+============================================================================================================
+---> Question 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+============================
+Answer:
+
+/*predict.py file*/
+#Load the model
+import pickle
+
+from flask import Flask
+from flask import request
+from flask import jsonify
+
+
+
+model = pickle.load(open('model1.bin', 'rb'))
+
+dv_file = 'dv.bin'
+with open(dv_file , 'rb') as f_in:
+    dv = pickle.load(f_in)   
+
+app = Flask('churn')
+
+@app.route('/predict' , methods=['POST'])
+def predict():
+    customer = request.get_json()
+
+    X = dv.transform([customer])
+    y_pred = model.predict_proba(X)[0,1]
+    churn = y_pred >= 0.5
+
+    result = {
+        'churn_probability' : float(y_pred),
+        'churn':bool(churn)
+    }
+    return jsonify(result)
+
+
+if __name__ == "__main__":
+    app.run(debug=True , host='0.0.0.0', port=8686) 
+
+
+
+/*predict-test.py file*/
+#!/usr/bin/env python
+# coding: utf-8
+
+import requests
+
+
+url = 'http://localhost:8686/predict'
+
+
+customer_id = 'xyz-123'
+customer = {"contract": "two_year", "tenure": 1, "monthlycharges": 10}
+
+response = requests.post(url , json=customer ).json()
+print(response)
+
+if response['churn'] == True:
+    print('sending promo email to %s' %(customer_id))
+else:
+    print('not sending promo email to %s' %(customer_id))    
+
+
+Commands:
+ C:\Python\Homework> python predict.py
+ 
+ C:\Python\Homework> python predict-test.py
+ 
+ Answer:
+{'churn': True, 'churn_probability': 0.9988892771007961}
+sending promo email to xyz-123
+
+Answer is 0.998
+
+
+
+        
+        
+
 
 
