@@ -151,6 +151,60 @@ sending promo email to xyz-123
 
 Answer is 0.998
 
+=====================================================================================
+---> Question 5
+Now create your own Dockerfile based on the image I prepared.
+
+It should start like that:
+
+FROM agrigorev/zoomcamp-model:3.8.12-slim
+# add your stuff here
+Now complete it:
+
+Install all the dependencies form the Pipenv file
+Copy your Flask script
+Run it with gunicorn
+When you build your image, what's the image id for agrigorev/zoomcamp-model:3.8.12-slim?
+
+Look at the first step of your build log. It should look something like that:
+
+$ docker some-command-for-building
+Sending build context to Docker daemon  2.048kB
+Step 1/N : FROM agrigorev/zoomcamp-model:3.8.12-slim
+ ---> XXXXXXXXXXXX
+Step 2/N : ....
+You need this XXXXXXXXXXXX.
+
+Alternatively, you can get this information when running docker images - it'll be in the "IMAGE ID" column. Submitting DIGEST (long string starting with "sha256") is also fine.
+
+
+==============
+Answer:
+PS C:\Python\Homework> docker build -t homework-test .
+Sending build context to Docker daemon 27.65 kB
+Step 1/8 : FROM agrigorev/zoomcamp-model:3.8.12-slim
+ ---> f0f43f7bc6e0
+ 
+ ==================================================================================================================
+ ---> Question 6
+Let's run your docker container!
+
+After running it, score this customer:
+
+url = "YOUR_URL"
+customer = {"contract": "two_year", "tenure": 12, "monthlycharges": 10}
+requests.post(url, json=customer).json()
+What's the probability that this customer is churning?
+
+===========
+Answer:
+1-build then run the docker image
+2-open a new terminal and run python predict-test.py
+
+the result is:
+PS C:\Python\Homework> python predict-test.py
+{'churn': False, 'churn_probability': 0.32940789808151005}
+not sending promo email to xyz-123
 
 
         
